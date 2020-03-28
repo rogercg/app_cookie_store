@@ -6,52 +6,35 @@ class CookiePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFCFAF8),
-      body: ListView.builder(
-        physics: const ClampingScrollPhysics(),
-        itemCount: 1,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            padding: EdgeInsets.only(right: 15.0),
-            width: MediaQuery.of(context).size.width - 30.0,
-            height: MediaQuery.of(context).size.height - 50.0,
-            child: Wrap(
-              children: <Widget>[
-                _buildCard('Cookie mint', '\$3.99', 'assets/images/cookiemint.jpg', false, false, context),
-                _buildCard('Cookie cream', '\$5.99', 'assets/images/cookiecream.jpg', true, false, context),
-                _buildCard('Cookie classic', '\$1.99','assets/images/cookieclassic.jpg', false, true, context),
-                _buildCard('Cookie choco', '\$2.99', 'assets/images/cookiechoco.jpg', false, false, context)
-              ],
-            ),
-          );
-        },
-
-
-          
-            // child: GridView.count(
-            //   crossAxisCount: 2,// 2 x 2
-            //   primary: false,
-            //   crossAxisSpacing: 10.0,// Espacios entre columnas
-            //   mainAxisSpacing: 15.0,// Espacios emtre filas
-            //   childAspectRatio: 0.95,// Radio de los hijos(termina afectando a la altura)
-            //   children: <Widget>[
-            //     _buildCard('Cookie mint', '\$3.99', 'assets/images/cookiemint.jpg', false, false, context),
-            //     _buildCard('Cookie cream', '\$5.99', 'assets/images/cookiecream.jpg', true, false, context),
-            //     _buildCard('Cookie classic', '\$1.99','assets/images/cookieclassic.jpg', false, true, context),
-            //     _buildCard('Cookie choco', '\$2.99', 'assets/images/cookiechoco.jpg', false, false, context),
-            //     _buildCard('Cookie classic', '\$1.99','assets/images/cookieclassic.jpg', false, true, context),
-            //     _buildCard('Cookie choco', '\$2.99', 'assets/images/cookiechoco.jpg', false, false, context)
-            //   ],
-            // )
-          
-
-
+      body: ListView(
+        children: <Widget>[
+          SizedBox(height: 15.0),
+          Container(
+              padding: EdgeInsets.only(right: 15.0),
+              width: MediaQuery.of(context).size.width - 30.0,
+              height: MediaQuery.of(context).size.height - 50.0,
+              child: GridView.count(
+                crossAxisCount: 2,
+                primary: false,
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 15.0,
+                childAspectRatio: 0.95,
+                children: <Widget>[
+                  _buildCard('Cookie mint', '\$3.99', 'assets/images/cookiemint.jpg', false, false, context),
+                  _buildCard('Cookie cream', '\$5.99', 'assets/images/cookiecream.jpg', true, false, context),
+                  _buildCard('Cookie classic', '\$1.99','assets/images/cookieclassic.jpg', false, true, context),
+                  _buildCard('Cookie choco', '\$2.99', 'assets/images/cookiechoco.jpg', false, false, context)
+                ],
+              )),
+          // SizedBox(height: 15.0)
+        ],
       ),
     );
   }
 
   Widget _buildCard(String name, String price, String imgPath, bool added, bool isFavorite, context) {
     return Padding(
-        padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
+        padding: EdgeInsets.only(/* top: 5.0, bottom: 5.0,  */left: 5.0, right: 5.0),
         child: InkWell(
             onTap: () {
               Navigator.of(context).push(
@@ -62,7 +45,6 @@ class CookiePage extends StatelessWidget {
                   )));
             },
             child: Container(
-                width: (MediaQuery.of(context).size.width * 0.5) - 27.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   boxShadow: [
@@ -116,8 +98,7 @@ class CookiePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             (!added)?_rowAddToCart():_rowAddCantity(),
-                          ])),
-                  SizedBox(height: 15)
+                          ]))
                 ]))));
   }
 
